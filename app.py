@@ -5,7 +5,7 @@ from modelos.cardapio.prato import Prato
 restaurante_praca = Restaurante('praça', 'Gourmet')
 
 
-bebida_suco = Bebida('Suco de Melancia', 5.0, 'grande')
+bebida_suco = Bebida('Suco de Abacaxi', 5.0, 'grande')
 
 # Aplicando desconto
 bebida_suco.aplicar_desconto()
