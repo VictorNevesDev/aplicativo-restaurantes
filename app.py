@@ -10,13 +10,13 @@ bebida_suco = Bebida('Suco de Abacaxi', 5.0, 'grande')
 # Aplicando desconto
 bebida_suco.aplicar_desconto()
 
-prato_paozinho = Prato('Paozinho', 2.0, 'O melhor pão da cidade')
+prato_peixe = Prato('Peixão', 2.0, 'O melhor peixe da cidade')
 
 # Aplicando desconto
-prato_paozinho.aplicar_desconto()
+prato_peixe.aplicar_desconto()
 
 restaurante_praca.adicionar_no_cardapio(bebida_suco)
-restaurante_praca.adicionar_no_cardapio(prato_paozinho)
+restaurante_praca.adicionar_no_cardapio(prato_peixe)
 
 
 def main():
