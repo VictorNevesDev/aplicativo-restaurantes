@@ -21,7 +21,7 @@ Com o intuito de organizar as funcionalidades e informações do projeto, foram 
   - [restaurante](#restaurante)
     - [Observações](#Observações)
 - [app](#app)
-- [Exemplo de putput](#Exemplo_de_Output)
+
 
 
 ## modelos
