@@ -131,6 +131,3 @@ def adicionar_no_cardapio(self, item):
 
 
 O arquivo `app.py` serve como um script principal para instanciar e manipular objetos das classes `Restaurante`, `Bebida` e `Prato`. Ele demonstra a criação de um restaurante, a adição de itens ao cardápio, a aplicação de descontos, a recepção de avaliações, e a exibição do cardápio e lista de restaurantes.
-
-### Exemplo_de_Output
-

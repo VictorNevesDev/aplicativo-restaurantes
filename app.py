@@ -24,7 +24,7 @@ restaurante_praca.receber_avaliacao('Leticia', 2)
 #restaurante_praca.alternar_estado()
 
 def main():
-    restaurante_praca.exibir_cardapio()
+    restaurante_praca.exibir_cardapio
     Restaurante.listar_restaurantes()
     
 
