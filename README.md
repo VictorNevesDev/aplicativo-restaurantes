@@ -1,151 +1,136 @@
-# JavaScript
+# Aplicativo Restaurantes
 
-## Documentação Oficial
 
----
+## Resumo
 
-https://developer.mozilla.org/pt-BR/docs/Learn/JavaScript/First_steps/What_is_JavaScript
 
- [Guia de JavaScript: o que é e como aprender a linguagem mais popular do mundo?](https://www.alura.com.br/artigos/javascript)
 
-## Template Strings
+Esse projeto consiste em uma simulação das funcionalidades iniciais de uma aplicativo de restaurantes. Nele, é possível escolher o restaurante, o cardápio e a média da avaliação dos clientes. 
 
----
+## Estrutura
 
-```jsx
-alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto}`);
+
+Com o intuito de organizar as funcionalidades e informações do projeto, foram desenvolvidas a seguinte estrutura de arquivos:
+
+- [modelos](#modelos)
+    - [cardapio](#cardapio)
+      -   [bebida](#bebida)
+        - [item_cardapio](#item_cardapio)
+        - [prato](#prato)
+  - [avaliacao](#avaliacao)
+  - [restaurante](#restaurante)
+    - [Observações](#Observações)
+- [app](#app)
+- [Exemplo de putput](#Exemplo_de_Output)
+
+
+## modelos
+
+
+
+Dentro da pasta **modelos** foram alocadas todas as funcionalidades e estruturas que o aplicativo contém. 
+
+## cardapio
+
+
+
+A pasta **cardapio** agrupa todos os arquivos que referentes a consulta e exibição do cardápio dos restaurantes. 
+
+## bebida
+
+
+
+O arquivo bebida.py tem como função criar a classe que irá instanciar o atributo `tamanho` e herdar os atributos `nome` e `preço` da classe pai `ItemCardapio`. Essa bebida representa a escolha do cliente ao utilizar o aplicativo. 
+
+**OBS**: Conforme o código abaixo, foi criada classe `Bebida` utilizando como parâmetro a classe `ItemCardapio`, fazendo-se necessária sua importação.
+
+```python
+from modelos.cardapio.item_cardapio import ItemCardapio
+
+class Bebida(ItemCardapio):
+    def __init__(self, nome, preco, tamanho):
+        # Objeto super() permite que você acesse informações da classe ItemCardapio
+        super().__init__(nome, preco)
+        self.tamanho = tamanho
 ```
 
-## Operadores Lógicos
+Nesse cenário, utiliza-se o objeto `super()` para acessar o método construtor da classe pai `ItemCardapio` , inicializando os atributos `nome` e `preco`.
 
----
+## item_cardapio
 
-### AND (&&)
 
-```jsx
-let idade = 25;
-let possuiCarteira = true;
 
-// se idade é maior que 18 e possui carteira…
-if (idade > 18 && possuiCarteira) {
-  console.log("Pode dirigir!");
-} else {
-  console.log("Não pode dirigir.");
-}
+Além de ser a classe pai para as classes `Bebida` e `Prato`, instanciando os atributos `nome` e `preco`, a classe ItemCardapio tem um peculiariedade. Essa classe tem a responsabilidade de “forçar” as classe filhas a possuírem o método `aplicar_desconto()`, através do uso do decorador `@abstractmethod`, conforme código abaixo:
+
+```python
+from abc import ABC, abstractmethod
+
+class ItemCardapio(ABC):
+    
+    def __init__(self, nome, preco):
+        self._nome = nome
+        self._preco = preco
+
+    # Classe abstrata = Força as classes 'filhas' a obrigatoriamente terem esse método
+    @abstractmethod
+    def aplicar_desconto(self):
+        pass
 ```
 
-### OR (||)
+## prato
 
-```jsx
-let temMaça = false;
-let temBanana = true;
 
-// se tem maça ou tem banana…
-if (temMaça || temBanana) {
-  console.log("Você tem frutas!");
-} else {
-  console.log("Não tem frutas.");
-}
+
+O arquivo prato.py tem como função criar a classe que irá instanciar o atributo `descricao` e herdar os atributos `nome` e `preço` da classe pai `ItemCardapio`. Seguindo as mesmas características da classe `Bebida`. Esse prato representa a escolha do cliente ao utilizar o aplicativo. 
+
+## avaliacao
+
+
+
+Arquivo responsável por criar a classe `Avaliacao` que instancia os atributos `cliente` e `nota`. A ideia é representar um sistema de avaliação na qual o cliente coloca seu nome e o número de estrelas daquele restaurante, referente a qualidade da sua experiência. 
+
+## restaurante
+
+
+
+Principal arquivo do projeto, o restaurante.py é responsável por criar a principal classe do sistema: `Restaurante` . Nela, são realizadas ações muito importantes como: 
+
+1. Criar e listar os restaurantes.
+2. Alterar e indicar se os restaurantes estão ativos.
+3. Adicionar e exibir as avaliações dos clientes.
+4. Incluir e exibir itens no cardápio.
+
+### Observações
+
+
+Conforme código abaixo, no método `listar_restaurantes()` utiliza-se o decorador `@classmethod` , indicando que o método `listar_restaurantes()` é um método de classe. Isso significa que ele pode ser chamado diretamente na classe `Restaurante` sem a necessidade de instanciar um objeto da classe. Conforme código abaixo:
+
+```python
+@classmethod
+    def listar_restaurantes(cls):
+        print(f'{'Nome do restaurante'.ljust(25)} | {'Categoria'.ljust(25)} | {'Avaliação'.ljust(25)} |{'Status'}')
+        for restaurante in cls.restaurantes:
+            print(f'{restaurante._nome.ljust(25)} | {restaurante._categoria.ljust(25)} | {str(restaurante.media_avaliacoes).ljust(25)} |{restaurante.ativo}')
 ```
 
-### Operador Ternário
+No método `ativo()`, utiliza-se o decorador `@property`, definindo que esse método pode ser acessado como um atributo. Isso indica que o método é destinado apenas para visualização, não para modificação.
 
-```jsx
-// Tentativa é igual a 1? Senão, colocar tentativas;
-let palavraTentativa = tentativas == 1 ? 'tentativa' : 'tentativas';
+```python
+@property
+    def ativo(self):
+        return '⌧' if self._ativo else '☐'
 ```
 
-## Math Random()
-
----
-
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" /> **`Math.random()`** gera um número aleatório entre 0 e 1 com diversas casas decimais
-
-**`parseInt`** basicamente força o resultado a ser um “int”, descartando as casas decimais
-
-</aside>
-
-Exemplo :
-
-```jsx
-parseInt(Math.random() * 10 + 1);
+```python
+def adicionar_no_cardapio(self, item):
+        if isinstance(item, ItemCardapio): # Verifica se o item inserido é uma instância da classe ItemCardapio
+            self._cardapio.append(item)
 ```
 
-## HTML + JavaScript
+## app
 
----
 
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" /> **`document`**  fornece acesso a todos os elementos e estruturas do documento HTML
+O arquivo `app.py` serve como um script principal para instanciar e manipular objetos das classes `Restaurante`, `Bebida` e `Prato`. Ele demonstra a criação de um restaurante, a adição de itens ao cardápio, a aplicação de descontos, a recepção de avaliações, e a exibição do cardápio e lista de restaurantes.
 
-**`querySelector`**  seleciona a TAG que você esteja tentando acessar o conteúndo no documento HTML
+### Exemplo_de_Output
 
-**`.innerHTML`**  modifica o código HTML de um elemento na página. NÃO É UM INPUT.
-
-</aside>
-
-Exemplo :
-
-```jsx
-// Cria uma função que consegue acessar o tag e o texto do html
-function exibirTextoNaTela(tag, texto) {
-
-    // document = acessa o script html | querySelector acessa o tag especificado
-    let campo = document.querySelector(tag);
-    // innerHTML atribui um valor dentro da variável que está no HTML
-    campo.innerHTML = texto;
-}
-```
-
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" /> **`document.getElementById("valor-total")`**  recupera a tag referente a esse id, no caso, valor-total
-
-**`.value`**  recupera valores digitados em campos de um formulário na página. É UM INPUT.
-
-**`.innerHTML`**  modifica o código HTML de um elemento na página.
-
-</aside>
-
-Exemplo :
-
-```jsx
-// document.getElementById("produto") RETORNA A TAG HTML - Tem que usar o .value para acessar o valor
-    let produto = document.getElementById("produto").value;
-```
-
-## Slicing and Dicing
-
----
-
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" /> `split()` separa trechos de uma String por um determinado delimitador;
-
-</aside>
-
-Exemplo:
-
-```jsx
-// .split quebra a string em arrays determinados pelo caracter divisório - entre chaves a posição do array
-    let nomeProduto = produto.split("-")[0];
-    let valorProduto = produto.split("R$")[1];
-
-// Nesse caso, "Fone de ouvido - R$200" ficou:
-// nomeProduto = Fone de ouvido
-// valorProduto = 200
-```
-
-## Responsive Voice
-
----
-
-<aside>
-<img src="https://www.notion.so/icons/code_gray.svg" alt="https://www.notion.so/icons/code_gray.svg" width="40px" /> Permite que o texto mostrado na tela seja falado: `responsiveVoice(conteúdo a ser dito, língua, velocidade da fala)`
-
-</aside>
-
-Exemplo:
-
-```jsx
-    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate: 1.2});
-```

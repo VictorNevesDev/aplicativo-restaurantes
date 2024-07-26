@@ -18,9 +18,15 @@ prato_peixe.aplicar_desconto()
 restaurante_praca.adicionar_no_cardapio(bebida_suco)
 restaurante_praca.adicionar_no_cardapio(prato_peixe)
 
+restaurante_praca.receber_avaliacao('Victor', 4)
+restaurante_praca.receber_avaliacao('Leticia', 2)
+
+#restaurante_praca.alternar_estado()
 
 def main():
-    restaurante_praca.exibir_cardapio
+    restaurante_praca.exibir_cardapio()
+    Restaurante.listar_restaurantes()
+    
 
 if __name__ == '__main__':
     main()

@@ -52,9 +52,9 @@ class Restaurante:
         print(f'Cardápio do restaurante {self._nome}\n')
         for i, item in enumerate(self._cardapio, start=1):
             if hasattr (item, 'descricao'):                 # Verifica se o item tem o atributo de classe descricao
-                print(f'{i}. Nome: {item._nome} | Preço: R${item._preco} | Descrição: {item.descricao}')
+                print(f'{i}. Nome: {item._nome} | Preço: R${item._preco} | Descrição: {item.descricao}\n')
             else:
-                print(f'{i}. Nome: {item._nome} | Preço: R${item._preco} | Tamanho: {item.tamanho}')
+                print(f'{i}. Nome: {item._nome} | Preço: R${item._preco} | Tamanho: {item.tamanho}\n')
 
 
 
