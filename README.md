@@ -113,6 +113,14 @@ Conforme código abaixo, no método `listar_restaurantes()` utiliza-se o decorad
             print(f'{restaurante._nome.ljust(25)} | {restaurante._categoria.ljust(25)} | {str(restaurante.media_avaliacoes).ljust(25)} |{restaurante.ativo}')
 ```
 
+E pode ser chamado na `main()` conforme abaixo:
+
+```python
+def main():
+    restaurante_praca.exibir_cardapio
+    Restaurante.listar_restaurantes() # Aqui o método listar_restaurantes é chamado sem ser ser instanciado
+```
+
 No método `ativo()`, utiliza-se o decorador `@property`, definindo que esse método pode ser acessado como um atributo. Isso indica que o método é destinado apenas para visualização, não para modificação.
 
 ```python
